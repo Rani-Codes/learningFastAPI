@@ -1,5 +1,4 @@
 from fastapi import HTTPException
-from fastapi.encoders import jsonable_encoder
 from sqlalchemy.orm import Session
 
 from . import models, schemas
@@ -18,8 +17,8 @@ def get_user_by_id(db: Session, user_id: int):
     return db.query(models.User).filter(models.User.id == user_id).first()
 
 
-def get_user_by_username(db: Session, user_username: str):
-    return db.query(models.User).filter(models.User.username == user_username).first()
+def get_user_by_username(db: Session, username: str):
+    return db.query(models.User).filter(models.User.username == username).first()
 
 
 def get_users(db: Session, skip: int = 0, limit: int = 100):
@@ -40,6 +39,11 @@ def delete_user(db: Session, user_id: int):
 
 
 def create_task(db: Session, task: schemas.TaskCreate, user_id: int):
+    user_data = get_user_by_id(db, user_id)
+
+    if not user_data:
+        raise HTTPException(status_code=404, detail="User not found")
+
     db_task = models.Task(**task.model_dump(), owner_id = user_id)
     db.add(db_task)
     db.commit()
