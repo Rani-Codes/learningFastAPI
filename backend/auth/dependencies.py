@@ -7,7 +7,7 @@ from jwt import InvalidTokenError
 import jwt
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
-from ..main import get_db
+from ..database import SessionLocal
 from ..crud import get_user_by_username
 from .hashing import verify_password
 
@@ -32,8 +32,14 @@ class Token(BaseModel):
 class TokenData(BaseModel):
     username: str | None = None
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/token")
 
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
 def authenticate_user(db: Session, username: str, password: str):
     user = get_user_by_username(db, username)

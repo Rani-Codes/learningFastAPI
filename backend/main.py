@@ -3,11 +3,13 @@ from sqlalchemy.orm import Session
 
 from . import crud, models, schemas
 from .database import SessionLocal, engine
+from .auth.router import router as auth_router
 
 #Creates the db tables
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+app.include_router(auth_router)
 
 #Dependency
 # creates a new SQLAlchemy SessionLocal that will be used in a single request, then closes after request finished
