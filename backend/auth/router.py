@@ -31,10 +31,3 @@ async def login_for_access_token(form_data: Annotated[OAuth2PasswordRequestForm,
         data={"sub": user.username}, expires_delta=access_token_expires
     )
     return Token(access_token=access_token, token_type="bearer")
-
-
-@router.get("/users/me/", response_model=UserInDB)
-async def read_users_me(
-    current_user: Annotated[UserInDB, Depends(get_current_user)],
-):
-    return current_user

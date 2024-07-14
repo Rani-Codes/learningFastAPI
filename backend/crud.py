@@ -56,8 +56,8 @@ def get_task_by_id(db: Session, task_id: int):
     return db.query(models.Task).filter(models.Task.id == task_id).first()
 
 
-def get_tasks(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(models.Task).offset(skip).limit(limit).all()
+def get_tasks(db: Session, user_id: int, skip: int = 0, limit: int = 100):
+    return db.query(models.Task).filter(models.Task.owner.has(id=user_id)).offset(skip).limit(limit).all()
 
 
 def update_task(db: Session, task: schemas.TaskUpdate, task_id: int):
