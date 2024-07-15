@@ -6,4 +6,7 @@ After reading the FastAPI docs I have decided to create a simple ToDo app with u
 
 Once I was satasfied with how the backend was performing I decided to move on to the Next.js documentation to get a review of react concepts and to also figure out how to use Next.js to connect my frontend to my backend and database.
 
+Note to Self: Node modules should not be committed to repository. (Add node_modules directory to .gitignore file)
+
 Currently: Looking at next and react docs and slowing building up the frontend
+
