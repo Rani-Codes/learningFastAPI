@@ -1,7 +1,8 @@
+import { poppins } from "@/ui/fonts";
 
 const Footer = () => {
   return (
-    <div>Footer</div>
+    <div className={`${poppins.className}`} >Footer</div>
   )
 }
 

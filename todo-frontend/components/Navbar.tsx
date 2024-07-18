@@ -4,6 +4,7 @@ import { useState } from "react";
 import { FcTodoList } from "react-icons/fc";
 import { CiMenuBurger } from "react-icons/ci";
 import { IoMdClose } from "react-icons/io";
+import { poppins } from "@/ui/fonts";
 
 
 const NavBar = () => {
@@ -34,7 +35,8 @@ const NavBar = () => {
                     "md:w-6/12",
                     "md:justify-center",
                     "md:items-center",
-                    "lg:w-4/12"
+                    "lg:w-4/12",
+                    "2xl:w-3/12"
                 ]
             }
 
@@ -43,7 +45,7 @@ const NavBar = () => {
 
 
   return (
-    <nav className="sticky top-0 z-20 bg-white flex w-full justify-between items-center p-2 shadow-md">
+    <nav className={`${poppins.className} sticky top-0 z-20 bg-white flex w-full justify-between items-center p-2 shadow-md`}>
         <Link href={"/"} className="flex gap-x-2 items-center">
             <FcTodoList size={28}/>
             <h1 className="text-xl">Todo List</h1>
@@ -53,11 +55,11 @@ const NavBar = () => {
             <Link href={"/tasks"} className="mx-2 hover:text-gray-600 border-b border-gray-200 pb-2 w-full text-center md:border-0 md:pb-0">
                 Tasks
             </Link>
-            <Link href={"/login"} className="mx-2 hover:text-gray-600 border-b border-gray-200 pb-2 w-full text-center md:border-0 md:pb-0">
+            <Link href={"/login"} className="mx-2 hover:text-gray-600 border-b border-gray-200 pb-2 w-full text-center md:border-0 md:border-l md:border-black md:pb-0">
                 Login
             </Link>
             <Link href={"/signup"} className="mx-2 hover:text-gray-600 border-b border-gray-200 last:border-b-0 w-full text-center md:border-0 md:pb-0">
-                <button className="md:border-2 md:border-blue-950 md:px-4 md:py-2 md:rounded-lg md:hover:bg-gray-100">Sign Up</button>
+                <button className="md:border-2 md:border-transparent md:bg-orange-600 md:text-white md:font-medium md:px-4 md:py-2 md:rounded-lg md:hover:bg-orange-700">Sign Up</button>
             </Link>
         </div>
 
