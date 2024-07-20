@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function LoginLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${poppins.className} antialiased relative overflow-hidden min-h-screen flex items-center justify-center`}>
+      <body className={`${poppins.className} antialiased relative overflow-hidden min-h-screen flex flex-col items-center justify-center`}>
         <main className="w-full">
           {children}
         </main>

@@ -1,6 +1,6 @@
 const page = () => {
   return (
-    <div>login</div>
+    <div className="text-center w-full">login</div>
   )
 }
 
