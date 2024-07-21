@@ -58,7 +58,7 @@ const NavBar = () => {
             <Link href={"/login"} className="mx-2 hover:text-gray-600 border-b border-gray-200 pb-2 w-full text-center md:border-0 md:border-l md:border-black md:pb-0">
                 Login
             </Link>
-            <Link href={"/api/next"} className="mx-2 hover:text-gray-600 border-b border-gray-200 last:border-b-0 w-full text-center md:border-0 md:pb-0">
+            <Link href={"/signup"} className="mx-2 hover:text-gray-600 border-b border-gray-200 last:border-b-0 w-full text-center md:border-0 md:pb-0">
                 <button className="md:border-2 md:border-transparent md:bg-orange-600 md:text-white md:font-medium md:px-4 md:py-2 md:rounded-lg md:hover:bg-orange-700">Sign Up</button>
             </Link>
         </div>
