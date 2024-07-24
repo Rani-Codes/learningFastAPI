@@ -1,5 +1,3 @@
-// app/login/layout.tsx
-
 import { poppins } from '@/ui/fonts';
 import { Metadata } from 'next';
 
