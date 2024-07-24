@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import "../globals.css";
 import { poppins } from '@/ui/fonts';
-import Navbar from "@/components/Navbar/AuthenticatedNavbar";
 import Footer from "@/components/Footer";
-
+import AuthNavBar from "@/components/Navbar/AuthNavbar";
 
 
 export const metadata: Metadata = {
@@ -19,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full">
       <body className="flex flex-col min-h-screen">
-        <Navbar />
+        <AuthNavBar />
         <main className={`${poppins.className} antialiased relative overflow-hidden flex-grow`}>
           {children}
         </main>

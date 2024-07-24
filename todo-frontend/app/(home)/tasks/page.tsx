@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import { fetchAPI } from '@/app/(auth)/utils/fetchAPI';
+import { fetchAPIClient } from '@/app/(auth)/utils/fetchAPI';
 
 interface Task {
   title: string;
@@ -19,7 +19,7 @@ const TasksPage: React.FC = () => {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const data = await fetchAPI('/tasks');
+        const data = await fetchAPIClient('/tasks');
         setTasks(data)
       } catch (error) {
         if (error instanceof Error) {
