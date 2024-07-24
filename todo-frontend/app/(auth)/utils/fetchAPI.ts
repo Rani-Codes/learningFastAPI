@@ -43,5 +43,5 @@ export async function login(username: string, password: string) {
   }
   
   export async function getCurrentUser() {
-    return fetchAPI('/users/me');
+    return fetchAPI('/users/me/');
   }
