@@ -4,11 +4,12 @@
 // to allow for me to have a dynamic navbar that is pre-rendered as well as to check tasks and 
 // display them accurately on the client side.
 
+import Cookies from 'js-cookie';
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 // Client-side fetch API
 export async function fetchAPIClient(endpoint: string, options: RequestInit = {}) {
-  const token = localStorage.getItem('token');
+  const token = Cookies.get('token')
   const headers = {
     'Content-Type': 'application/json',
     ...options.headers,
@@ -62,6 +63,6 @@ export async function login(username: string, password: string) {
     }
   
     const data = await response.json();
-    document.cookie = `token=${data.access_token}; path=/;`
+    Cookies.set('token', data.access_token, { path: '/' });
     return data;
   }

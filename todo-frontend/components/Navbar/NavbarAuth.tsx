@@ -5,8 +5,6 @@ import { FcTodoList } from "react-icons/fc";
 import { CiMenuBurger } from "react-icons/ci";
 import { IoMdClose } from "react-icons/io";
 import { poppins } from "@/ui/fonts";
-//Had to npm install js-cookie because I want to remove the auth cookie while keeping this a client component
-// idk if there was a better solution. This is good enough.
 import Cookies from 'js-cookie';
 
 const NavBarAuth = () => {
