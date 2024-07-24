@@ -1,7 +1,7 @@
 "use client"
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { getCurrentUser } from '@/app/(auth)/utils/apiCalls'
+import { getCurrentUser } from '@/app/(auth)/utils/fetchAPI'
 
 const withAuth = (WrappedComponent: React.ComponentType) => {
   return (props: any) => {
