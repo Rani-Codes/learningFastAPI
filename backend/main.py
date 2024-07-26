@@ -40,6 +40,12 @@ def get_db():
 
 @app.post("/users/", response_model=schemas.UserInDB, tags=["users"])
 def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
+    # Explicitly enforce min_length validation
+    if not user.username or len(user.username) < 4:
+        raise HTTPException(status_code=422, detail="Username must be at least 4 characters long")
+    if not user.password or len(user.password) < 4:
+        raise HTTPException(status_code=422, detail="Password must be at least 4 characters long")
+
     db_user = crud.get_user_by_username(db, username = user.username)
     if db_user:
         raise HTTPException(status_code=400, detail="Username already registered")

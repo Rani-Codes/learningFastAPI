@@ -1,4 +1,5 @@
-from pydantic import BaseModel
+from typing import Annotated
+from pydantic import BaseModel, constr
 
 class TaskBase(BaseModel):
     title: str
@@ -21,10 +22,10 @@ class TaskInDB(TaskBase):
         orm_mode = True
 
 class UserBase(BaseModel):
-    username: str
+    username: Annotated[str, constr(min_length=4)]
 
 class UserCreate(UserBase):
-    password: str
+    password: Annotated[str, constr(min_length=4)]
 
 class UserInDB(UserBase):
     id: int
