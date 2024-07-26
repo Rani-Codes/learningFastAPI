@@ -1,4 +1,5 @@
-// This is a utility file to help fetch API requests. This will help manage headers, tokens, and error handling 
+// This is a utility file to help fetch API requests. This will help manage headers, tokens, and error handling
+// Purpose: Act as a generic fetch request which can be expanded upon.
 
 //Had to use cookies and localStorage because I want this to be a server and client component
 // to allow for me to have a dynamic navbar that is pre-rendered as well as to check tasks and 
@@ -43,26 +44,3 @@ export async function fetchAPIServer(endpoint: string, token: string | undefined
 
   return response.json();
 }
-
-
-export async function login(username: string, password: string) {
-  const response = await fetch(`${API_URL}/auth/token`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body: new URLSearchParams({
-      username,
-      password,
-    }),
-  });
-
-    if (!response.ok) {
-      const error = await response.json();
-      throw new Error(error.detail || 'Something went wrong');
-    }
-  
-    const data = await response.json();
-    Cookies.set('token', data.access_token, { path: '/' });
-    return data;
-  }
