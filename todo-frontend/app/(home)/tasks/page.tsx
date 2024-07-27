@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { fetchAPIClient } from '@/app/(auth)/utils/fetchAPI';
+import TaskLayout from '@/components/TaskLayout';
 
 interface Task {
   title: string;
@@ -44,17 +45,14 @@ const TasksPage: React.FC = () => {
   }
 
   return (
-    <div className='text-center w-full my-8'>
-      <h1>Your Tasks</h1>
-      <ul>
+    <div className="flex w-full justify-center my-10">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-20">
         {tasks.map((task) => (
-          <div key={task.id} className='py-4'>
-            <h2>Title: {task.title}</h2>
-            <p>Description: {task.description}</p>
-            <p>Completed: {task.completed ? 'Yes' : 'No'}</p>
-          </div>
-        ))}
-      </ul>
+            <div key={task.id} >
+              <TaskLayout title={task.title} description={task.description} completed={task.completed} id={task.id} />
+            </div>
+          ))}
+      </div>
     </div>
   );
 };
