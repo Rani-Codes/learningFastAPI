@@ -1,7 +1,6 @@
 'use client'
 import { useState } from "react"
 import { signup } from "../utils/authAPI"
-import { useRouter } from 'next/navigation'
 
 
 import {
@@ -22,7 +21,6 @@ const Signup = () => {
   const [password, setPassword] = useState('')
   const [error, setError] = useState<String | null>(null)
   const [success, setSuccess] = useState<string | null>(null)
-  const router = useRouter()
 
   
   const handleSubmit = async (e: React.FormEvent) => {
@@ -31,7 +29,6 @@ const Signup = () => {
       try {
         await signup(username, password)
         setSuccess("User successfully created")
-        // setTimeout(() => router.push('/tasks'), 20000) // Redirect to tasks page after 20 seconds
       }
       catch (error) {
           if (error instanceof Error) {
