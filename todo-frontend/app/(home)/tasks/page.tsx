@@ -38,7 +38,7 @@ const TasksPage: React.FC = () => {
   }, []);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <p className='flex justify-center items-center w-full h-screen text-xl'>Loading...</p>;
   }
 
   if (error) {
