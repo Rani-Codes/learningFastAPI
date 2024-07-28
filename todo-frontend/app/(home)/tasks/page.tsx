@@ -47,7 +47,7 @@ const TasksPage: React.FC = () => {
 
   return (
     <div className="flex w-full justify-center my-10 p-4">
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-10 lg:grid-cols-3 lg:gap-20">
+        <div className={`${tasks.length? "grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-10 lg:grid-cols-3 lg:gap-20" : "grid grid-cols-1"}`}>
         {tasks.map((task) => (
             <div key={task.id} >
               <TaskLayout title={task.title} description={task.description} completed={task.completed} id={task.id} />
