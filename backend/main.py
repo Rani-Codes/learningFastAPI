@@ -1,5 +1,6 @@
 from typing import Annotated
-from fastapi import Depends, FastAPI, HTTPException
+from fastapi import Depends, FastAPI, HTTPException, Request
+from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
 
 from . import crud, models, schemas
@@ -29,6 +30,17 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.options("/auth/token")
+async def preflight(request: Request):
+    return JSONResponse(
+        content={},
+        headers={
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+            "Access-Control-Allow-Headers": "Authorization, Content-Type",
+        },
+    )
 
 #Dependency
 # creates a new SQLAlchemy SessionLocal that will be used in a single request, then closes after request finished
