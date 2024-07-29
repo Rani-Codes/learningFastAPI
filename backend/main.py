@@ -17,16 +17,10 @@ models.Base.metadata.create_all(bind=engine)
 
 
 #Add CORS to allow backend to communicate with frontend
-origins = [
-    "http://localhost:3000",
-    "https://todo-frontend-icggj8n6k-ranis-projects-cfb30595.vercel.app",
-    "https://todo-frontend-zeta-sandy.vercel.app",
-]
-
 middleware = [
     Middleware (
         CORSMiddleware,
-        allow_origins=origins,
+        allow_origins=["*"],
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
