@@ -13,34 +13,28 @@ from fastapi.middleware.cors import CORSMiddleware
 #Creates the db tables
 models.Base.metadata.create_all(bind=engine)
 
-app = FastAPI()
-app.include_router(auth_router)
 
-#Add CORS to allow backend to communicate with frontend
-origins = [
-    "http://localhost:3000",
-    "https://todo-frontend-icggj8n6k-ranis-projects-cfb30595.vercel.app",
-    "https://todo-frontend-zeta-sandy.vercel.app",
-]
+def create_app() -> CORSMiddleware:
+    """Create app wrapper to overcome middleware issues."""
+    fastapi_app = FastAPI()
+    fastapi_app.include_router(auth_router)
+    #Add CORS to allow backend to communicate with frontend
+    origins = [
+        "http://localhost:3000",
+        "https://todo-frontend-icggj8n6k-ranis-projects-cfb30595.vercel.app",
+        "https://todo-frontend-zeta-sandy.vercel.app",
+    ]
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-@app.options("/auth/token")
-async def preflight(request: Request):
-    return JSONResponse(
-        content={},
-        headers={
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-            "Access-Control-Allow-Headers": "Authorization, Content-Type",
-        },
+    return CORSMiddleware(
+        fastapi_app,
+        allow_origins=origins,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
     )
+
+
+app = create_app()
 
 #Dependency
 # creates a new SQLAlchemy SessionLocal that will be used in a single request, then closes after request finished
@@ -122,3 +116,15 @@ def delete_task(task_id: int, db: Session = Depends(get_db), current_user: schem
 @app.get("/")
 async def hello():
     return {"message": "Hello Frontend"}
+
+# Maybe putting this at the end will help fix the error when trying to get auth token from headers on the frontend
+@app.options("/auth/token")
+async def preflight(request: Request):
+    return JSONResponse(
+        content={},
+        headers={
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+            "Access-Control-Allow-Headers": "Authorization, Content-Type",
+        },
+    )
