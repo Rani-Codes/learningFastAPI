@@ -18,8 +18,8 @@ app.include_router(auth_router)
 #Add CORS to allow backend to communicate with frontend
 origins = [
     "http://localhost:3000",
-    "https://todo-frontend-icggj8n6k-ranis-projects-cfb30595.vercel.app/",
-    "https://todo-frontend-zeta-sandy.vercel.app/",
+    "https://todo-frontend-icggj8n6k-ranis-projects-cfb30595.vercel.app",
+    "https://todo-frontend-zeta-sandy.vercel.app",
 ]
 
 app.add_middleware(
