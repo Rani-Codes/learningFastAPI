@@ -8,33 +8,34 @@ from .database import SessionLocal, engine
 from .auth.router import router as auth_router
 from .auth.dependencies import get_current_user
 
-from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware import Middleware
+from starlette.middleware.cors import CORSMiddleware
 
 #Creates the db tables
 models.Base.metadata.create_all(bind=engine)
 
 
-def create_app() -> CORSMiddleware:
-    """Create app wrapper to overcome middleware issues."""
-    fastapi_app = FastAPI()
-    fastapi_app.include_router(auth_router)
-    #Add CORS to allow backend to communicate with frontend
-    origins = [
-        "http://localhost:3000",
-        "https://todo-frontend-icggj8n6k-ranis-projects-cfb30595.vercel.app",
-        "https://todo-frontend-zeta-sandy.vercel.app",
-    ]
 
-    return CORSMiddleware(
-        fastapi_app,
+#Add CORS to allow backend to communicate with frontend
+origins = [
+    "http://localhost:3000",
+    "https://todo-frontend-icggj8n6k-ranis-projects-cfb30595.vercel.app",
+    "https://todo-frontend-zeta-sandy.vercel.app",
+]
+
+middleware = [
+    Middleware (
+        CORSMiddleware,
         allow_origins=origins,
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
-    )
+    ),
+]
 
 
-app = create_app()
+app = FastAPI(middleware=middleware)
+app.include_router(auth_router)
 
 #Dependency
 # creates a new SQLAlchemy SessionLocal that will be used in a single request, then closes after request finished
@@ -116,15 +117,3 @@ def delete_task(task_id: int, db: Session = Depends(get_db), current_user: schem
 @app.get("/")
 async def hello():
     return {"message": "Hello Frontend"}
-
-# Maybe putting this at the end will help fix the error when trying to get auth token from headers on the frontend
-@app.options("/auth/token")
-async def preflight(request: Request):
-    return JSONResponse(
-        content={},
-        headers={
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-            "Access-Control-Allow-Headers": "Authorization, Content-Type",
-        },
-    )
