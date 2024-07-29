@@ -11,6 +11,7 @@ interface Task {
   id: number;
   completed: boolean;
   owner_id: number;
+  count: number,
 }
 
 const TasksPage: React.FC = () => {
@@ -45,15 +46,20 @@ const TasksPage: React.FC = () => {
     return <p>Error: {error}</p>;
   }
 
+  let count:number = 0
+
   return (
     <div className="flex w-full justify-center my-10 p-4">
         <div className={`${tasks.length? "grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-10 lg:grid-cols-3 lg:gap-20" : "grid grid-cols-1"}`}>
-        {tasks.map((task) => (
-            <div key={task.id} >
-              <TaskLayout title={task.title} description={task.description} completed={task.completed} id={task.id} />
+        {tasks.map((task) => {
+          count += 1; // increment count for each task
+          return (
+            <div key={task.id}>
+              <TaskLayout title={task.title} description={task.description} completed={task.completed} id={task.id} count={count} />
             </div>
-          ))}
-        <EmptyTaskLayout/>
+          );
+        })}
+        <EmptyTaskLayout />
       </div>
     </div>
   );

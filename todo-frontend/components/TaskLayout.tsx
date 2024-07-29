@@ -17,6 +17,7 @@ interface Task {
     description?: string
     id: number;
     completed: boolean;
+    count: number
   }
 
 export default function TaskLayout(task: Task) {
@@ -83,7 +84,7 @@ export default function TaskLayout(task: Task) {
         </div>
 
         <div className="flex justify-between w-full items-center">
-            <h1 className="text-white text-sm px-2">{task.id}</h1>
+            <h1 className="text-white text-sm px-2">{task.count}</h1>
 
             <Dialog>
               <DialogTrigger asChild>
