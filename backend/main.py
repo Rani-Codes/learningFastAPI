@@ -18,6 +18,8 @@ app.include_router(auth_router)
 #Add CORS to allow backend to communicate with frontend
 origins = [
     "http://localhost:3000",
+    "https://todo-frontend-icggj8n6k-ranis-projects-cfb30595.vercel.app/",
+    "https://todo-frontend-zeta-sandy.vercel.app/",
 ]
 
 app.add_middleware(
@@ -103,3 +105,8 @@ def delete_task(task_id: int, db: Session = Depends(get_db), current_user: schem
     elif db_task.owner_id != current_user.id:
         raise HTTPException(status_code=404, detail="Not authorized to delete this task")
     return crud.delete_task(db = db, task_id = task_id)
+
+
+@app.get("/")
+async def hello():
+    return {"message": "Hello Frontend"}
