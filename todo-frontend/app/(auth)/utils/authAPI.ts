@@ -45,3 +45,21 @@ export async function signup(username:string, password: string) {
       Cookies.set('token', data.access_token, { path: '/' });
       return data;
 }
+
+export async function deleteUser(id: any) {
+  const token = Cookies.get('token'); 
+  const response = await fetch(`${API_URL}/users/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
+    },
+  })
+
+  if(!response.ok) {
+    const error = await response.json()
+    throw new Error(error.detail || "Something went wrong")
+  }
+
+  return await response.json
+}
