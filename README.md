@@ -15,6 +15,8 @@ Note to Self: When deploying to Vercel or Render, don't add quotes around the en
 # Update
 After nearly three weeks of working on this, and around 80 hours spent, the project is finally done and deployed. I am very happy with how it turned out and am proud of myself for designing, developing, and deploying it all on my own.
 
+I had to create a new branch for the backend to host it seperately but I think in the future I may not need to do that.
+
 ### If you would like to try the app out go to: **todo-frontend-zeta-sandy.vercel.app/**
 
 ### 7-29-2024 Update
